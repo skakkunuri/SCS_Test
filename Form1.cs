@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SCS_Test
@@ -65,13 +58,7 @@ namespace SCS_Test
 
             SelectedAgencyDataGridView.SelectAll();
             //Now move all to the destination grid
-            MoveRowsBetweenGridViews(SelectedAgencyDataGridView,AllActiveAgencyDataGridView);
-            //for (int rowIndex = 0; rowIndex <= SelectedAgencyDataGridView.Rows.Count - 1; rowIndex++)
-            //{
-            //    string agencyCode = SelectedAgencyDataGridView[0, rowIndex].Value.ToString();
-            //    string agencyName = SelectedAgencyDataGridView[1, rowIndex].Value.ToString();
-            //    AllActiveAgencyDataGridView.Rows.Add(agencyCode, agencyName);
-            //}//end for
+            MoveRowsBetweenGridViews(SelectedAgencyDataGridView,AllActiveAgencyDataGridView);          
             SelectedAgencyDataGridView.Rows.Clear();
             MoveSelectedToAllButton.Enabled = false;
             GetGridRowCount();
@@ -88,16 +75,7 @@ namespace SCS_Test
                 MessageBox.Show("No rows selected", "No rows", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-            MoveRowsBetweenGridViews(AllActiveAgencyDataGridView, SelectedAgencyDataGridView,true);
-            //for (int rowIndex = 0; rowIndex <= AllActiveAgencyDataGridView.SelectedRows.Count - 1; rowIndex++)
-            //{
-            //    foreach (DataGridViewRow row in AllActiveAgencyDataGridView.SelectedRows)
-            //    {                   
-            //        // Delete from source grid
-            //        AllActiveAgencyDataGridView.Rows.RemoveAt(row.Index);
-            //    }
-            //}// end for
+            MoveRowsBetweenGridViews(AllActiveAgencyDataGridView, SelectedAgencyDataGridView,true);           
         }
         /// <summary>
         /// This event filed when the row selection of All Active grid changed to make sure that we are disabling all the buttons properly
