@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace SCS_Test
 {
@@ -20,7 +21,6 @@ namespace SCS_Test
             LoadData();
             //SelectedCountLabel.Text = AllCountLabel.Text = "Count: 0";
         }
-
         /// <summary>
         /// When close button is clicked form will be closed
         /// </summary>
@@ -171,18 +171,23 @@ namespace SCS_Test
                     sourceGridView.Rows.RemoveAt(row.Index);
             }//end for
         }
-        #endregion
         private void LoadDataForSelectedTeam(string teamCode)
         {
             //Call the service to fetch the data already exists for the selected team.
-
+            Thread.Sleep(5000);
         }
-
         private void TeamComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectedAgencyNameLabel.Text = (TeamComboBox.Text.Equals("NONE")) ? 
+            this.Cursor = Cursors.WaitCursor;
+            StatusLabel.Text = "Working...Please wait...";
+            Refresh();
+            SelectedAgencyNameLabel.Text = (TeamComboBox.Text.Equals("NONE")) ?
                 "Agencies not assigned to any team" : string.Format("Selected agencies for {0} team", TeamComboBox.Text);
-            //LoadDataForSelectedTeam(TeamComboBox.SelectedValue.ToString());
+            LoadDataForSelectedTeam(TeamComboBox.Text.ToString());            
+            StatusLabel.Text = "Ready";
+            this.Cursor = Cursors.Default;
         }
+        #endregion
+
     }
 }
