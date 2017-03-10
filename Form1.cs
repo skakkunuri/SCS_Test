@@ -1,11 +1,22 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Threading;
+using SCSClient.Models;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Collections;
+using System.Collections.Generic;
+using System.Net.Http.Formatting;
 
 namespace SCS_Test
 {
     public partial class frmTeamAgencyAssignment : Form
     {
+        #region "Private veriables"
+        static HttpClient webAPIClient = new HttpClient();
+        #endregion
+
+
         public frmTeamAgencyAssignment()
         {
             InitializeComponent();
@@ -18,6 +29,10 @@ namespace SCS_Test
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Initial the service
+            webAPIClient.BaseAddress = new Uri("http://localhost:61583/api/");
+            webAPIClient.DefaultRequestHeaders.Accept.Clear();
+            webAPIClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));            
             LoadData();
             //SelectedCountLabel.Text = AllCountLabel.Text = "Count: 0";
         }
@@ -139,6 +154,32 @@ namespace SCS_Test
         private void LoadData()
         {
             // Get this data from database only once
+            GetAgencyData();
+            GetAllTeamsInformation();
+            GetGridRowCount();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetAllTeamsInformation()
+        {
+            HttpResponseMessage response = webAPIClient.GetAsync("Team/GetActiveTeams").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                List<Team> teamList = response.Content.ReadAsAsync<List<Team>>().Result;
+                TeamComboBox.Items.Clear();
+                foreach (Team t in teamList)                    
+                {
+                    TeamComboBox.Items.Add(t.Team_Desc);
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetAgencyData()
+        {
             AllActiveAgencyDataGridView.Rows.Add("ADCR", "PHD USA (NY)");
             AllActiveAgencyDataGridView.Rows.Add("AMAG", "AMER MEDIA ADVOCACY");
             AllActiveAgencyDataGridView.Rows.Add("AMAG1", "AMER MEDIA ADVOCACY1");
@@ -156,8 +197,8 @@ namespace SCS_Test
             AllActiveAgencyDataGridView.Rows.Add("AMAG13", "AMER MEDIA ADVOCACY13");
             AllActiveAgencyDataGridView.Rows.Add("AMAG14", "AMER MEDIA ADVOCACY14");
             AllActiveAgencyDataGridView.Rows.Add("AMAG15", "AMER MEDIA ADVOCACY15");
-            GetGridRowCount();            
         }
+
         private void MoveRowsBetweenGridViews(DataGridView sourceGridView, DataGridView destinationGridView, bool isMove = false)
         {
             if (sourceGridView.SelectedRows.Count <= 0)

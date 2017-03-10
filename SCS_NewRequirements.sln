@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCS_UI", "SCS_UI.csproj", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCSWebAPI", "SCSWebAPI\SCSWebAPI.csproj", "{6F5EE52F-4903-4CA2-B881-3B9343783F4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCSDataAccess", "SCSDataAccess\SCSDataAccess.csproj", "{739F0436-9BCD-4C76-9C0E-66D8F0218E17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6F5EE52F-4903-4CA2-B881-3B9343783F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F5EE52F-4903-4CA2-B881-3B9343783F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F5EE52F-4903-4CA2-B881-3B9343783F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{739F0436-9BCD-4C76-9C0E-66D8F0218E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{739F0436-9BCD-4C76-9C0E-66D8F0218E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{739F0436-9BCD-4C76-9C0E-66D8F0218E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{739F0436-9BCD-4C76-9C0E-66D8F0218E17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
