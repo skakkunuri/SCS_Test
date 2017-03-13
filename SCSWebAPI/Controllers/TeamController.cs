@@ -5,17 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SCSWebAPI.Models;
-//using SCSDataAccess;
+using SCSDataAccess;
+using System.Collections.Generic;
 namespace SCSWebAPI.Controllers
 {
     public class TeamController : ApiController
     {
-        Team[] activeTeams = new Team[]
-        {
-            new Team{Team_ID = 1, Team_Desc="ABCD", Active_Ind="A" },
-            new Team{Team_ID = 2, Team_Desc="MNOP", Active_Ind="I" },
-            new Team{Team_ID = 3, Team_Desc="WXYZ", Active_Ind="A" }
-        };
+        IEnumerable<SCSDataAccess.Team> activeTeams;
         /// <summary>
         /// Get a team information absed on team id
         /// </summary>
@@ -31,11 +27,11 @@ namespace SCSWebAPI.Controllers
         /// </summary>
         /// <returns></returns>        
         [HttpGet]
-        public IEnumerable<Team> GetActiveTeams()
-        {            
+        public IEnumerable<SCSDataAccess.Team> GetActiveTeams()
+        {
+            SCSDataAccess.Team team = new SCSDataAccess.Team();
+            activeTeams = team.GetAllTeamsData();
             return activeTeams;
         }
-       
-
     }
 }
