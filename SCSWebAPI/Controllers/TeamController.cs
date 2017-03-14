@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using SCSWebAPI.Models;
-using SCSDataAccess;
-using System.Collections.Generic;
 namespace SCSWebAPI.Controllers
 {
     public class TeamController : ApiController

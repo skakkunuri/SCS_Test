@@ -25,6 +25,7 @@ namespace SCSDataAccess
         #region "Public methods"
         public IEnumerable<Team> GetAllTeamsData()
         {
+            Team oneTeam;
             List<Team> teamList = new List<Team>();
             using (SqlConnection con = new SqlConnection(CONNECTIONSTRING))
             {
@@ -33,13 +34,18 @@ namespace SCSDataAccess
                     using (SqlDataAdapter adapter = new SqlDataAdapter())
                     {
                         DataSet ds = new DataSet();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "GetAllTeams";
+                        adapter.SelectCommand = cmd;
+                        con.Open();
                         adapter.Fill(ds);
-                        if(ds.Tables.Count <=0)
+                        con.Close();
+                        if(ds.Tables.Count > 0)
                         {
                             ds.Tables[0].TableName = "Teams";
                             foreach (DataRow row in ds.Tables["Teams"].Rows)
                             {
-                                Team oneTeam = new Team();
+                                oneTeam = new Team();
                                 oneTeam.Team_ID = int.Parse(row[0].ToString());
                                 oneTeam.Team_Desc = row[1].ToString();
                                 oneTeam.Active_Ind = row[2].ToString();
@@ -49,6 +55,12 @@ namespace SCSDataAccess
                     } // adapter
                 } // command
             } // connection
+            // Also add NONE as one of the options to choose
+            oneTeam = new Team();
+            oneTeam.Team_ID = 0;
+            oneTeam.Team_Desc = "NONE";
+            oneTeam.Active_Ind = "A";
+            teamList.Add(oneTeam);
             return teamList;
         }
         #endregion

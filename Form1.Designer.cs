@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TeamComboBox = new System.Windows.Forms.ComboBox();
             this.TeamSelectLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,7 +61,7 @@
             // TeamComboBox
             // 
             this.TeamComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.TeamComboBox.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TeamComboBox.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TeamComboBox.FormattingEnabled = true;
             this.TeamComboBox.Items.AddRange(new object[] {
             "NONE",
@@ -72,7 +74,7 @@
             "Team 7"});
             this.TeamComboBox.Location = new System.Drawing.Point(261, 42);
             this.TeamComboBox.Name = "TeamComboBox";
-            this.TeamComboBox.Size = new System.Drawing.Size(204, 22);
+            this.TeamComboBox.Size = new System.Drawing.Size(204, 24);
             this.TeamComboBox.TabIndex = 1;
             this.TeamComboBox.SelectedIndexChanged += new System.EventHandler(this.TeamComboBox_SelectedIndexChanged);
             // 
@@ -92,9 +94,9 @@
             this.label1.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(11, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 16);
+            this.label1.Size = new System.Drawing.Size(190, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "All Active Agencies:";
+            this.label1.Text = "All Active Unassigned Agencies:";
             // 
             // groupBox1
             // 
@@ -144,6 +146,14 @@
             this.SelectedAgencyDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.SelectedAgencyDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.SelectedAgencyDataGridView.Location = new System.Drawing.Point(372, 34);
             this.SelectedAgencyDataGridView.Name = "SelectedAgencyDataGridView";
             this.SelectedAgencyDataGridView.ReadOnly = true;
@@ -177,6 +187,14 @@
             this.AllActiveAgencyDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AgencyCode,
             this.AgencyName});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.AllActiveAgencyDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.AllActiveAgencyDataGridView.Location = new System.Drawing.Point(13, 34);
             this.AllActiveAgencyDataGridView.Name = "AllActiveAgencyDataGridView";
             this.AllActiveAgencyDataGridView.ReadOnly = true;

@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Formatting;
+using System.Diagnostics;
 
 namespace SCS_Test
 {
@@ -15,7 +16,6 @@ namespace SCS_Test
         #region "Private veriables"
         static HttpClient webAPIClient = new HttpClient();
         #endregion
-
 
         public frmTeamAgencyAssignment()
         {
@@ -157,6 +157,7 @@ namespace SCS_Test
             GetAgencyData();
             GetAllTeamsInformation();
             GetGridRowCount();
+            TeamComboBox.SelectedIndex = -1;
         }
         /// <summary>
         /// 
@@ -168,11 +169,10 @@ namespace SCS_Test
             if (response.IsSuccessStatusCode)
             {
                 List<Team> teamList = response.Content.ReadAsAsync<List<Team>>().Result;
-                TeamComboBox.Items.Clear();
-                foreach (Team t in teamList)                    
-                {
-                    TeamComboBox.Items.Add(t.Team_Desc);
-                }
+                TeamComboBox.Items.Clear();                
+                TeamComboBox.DataSource = teamList;
+                TeamComboBox.DisplayMember = "Team_Desc";
+                TeamComboBox.ValueMember = "Team_ID";                
             }
         }
         /// <summary>
@@ -198,7 +198,6 @@ namespace SCS_Test
             AllActiveAgencyDataGridView.Rows.Add("AMAG14", "AMER MEDIA ADVOCACY14");
             AllActiveAgencyDataGridView.Rows.Add("AMAG15", "AMER MEDIA ADVOCACY15");
         }
-
         private void MoveRowsBetweenGridViews(DataGridView sourceGridView, DataGridView destinationGridView, bool isMove = false)
         {
             if (sourceGridView.SelectedRows.Count <= 0)
@@ -215,11 +214,12 @@ namespace SCS_Test
         private void LoadDataForSelectedTeam(string teamCode)
         {
             //Call the service to fetch the data already exists for the selected team.
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
         }
         private void TeamComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            //Debug.WriteLine("Selected value  = " + TeamComboBox.SelectedValue.ToString() + " Text = " +  TeamComboBox.Text.ToString());
             StatusLabel.Text = "Working...Please wait...";
             Refresh();
             SelectedAgencyNameLabel.Text = (TeamComboBox.Text.Equals("NONE")) ?
