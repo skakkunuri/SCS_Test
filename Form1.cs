@@ -156,8 +156,7 @@ namespace SCS_Test
             // Get this data from database only once
             GetAgencyData();
             GetAllTeamsInformation();
-            GetGridRowCount();
-            TeamComboBox.SelectedIndex = -1;
+            GetGridRowCount();            
         }
         /// <summary>
         /// 
@@ -174,6 +173,7 @@ namespace SCS_Test
                 TeamComboBox.DisplayMember = "Team_Desc";
                 TeamComboBox.ValueMember = "Team_ID";                
             }
+            TeamComboBox.SelectedIndex = -1; //Just to make the combobox not to select anything
         }
         /// <summary>
         /// 
@@ -229,6 +229,5 @@ namespace SCS_Test
             this.Cursor = Cursors.Default;
         }
         #endregion
-
     }
 }
