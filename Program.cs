@@ -16,7 +16,8 @@ namespace SCS_Test
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmTeamAgencyAssignment());
+            //Application.Run(new frmTeamAgencyAssignment());
+            Application.Run(new frmProjectedInventory());
         }
     }
 }
