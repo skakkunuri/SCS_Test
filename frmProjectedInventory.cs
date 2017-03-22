@@ -12,14 +12,17 @@ namespace SCS_Test
 {
     public partial class frmProjectedInventory : Form
     {
+        #region "Events"
         public frmProjectedInventory()
         {
             InitializeComponent();
+            ResetForm();
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            Dispose();
+            //Dispose();
+            Application.Exit();
         }
 
         private void GetInventorybutton_Click(object sender, EventArgs e)
@@ -55,5 +58,38 @@ namespace SCS_Test
                 SubDaypartComboBox.Enabled = false;
             }
         }
-    }
+
+        private void AdjustedQ1InventoryNumericUpDown_Enter(object sender, EventArgs e)
+        {
+            NumericUpDown send = (NumericUpDown)sender;
+            switch (send.Name.ToString().ToUpper())
+            {
+                case "ADJUSTEDQ1INVENTORYNUMERICUPDOWN":
+                    AdjustedQ1InventoryNumericUpDown.Select(0, AdjustedQ1InventoryNumericUpDown.Value.ToString().Length);
+                    break;
+                case "ADJUSTEDQ2INVENTORYNUMERICUPDOWN":
+                    AdjustedQ2InventoryNumericUpDown.Select(0, AdjustedQ2InventoryNumericUpDown.Value.ToString().Length);
+                    break;
+                case "ADJUSTEDQ3INVENTORYNUMERICUPDOWN":
+                    AdjustedQ3InventoryNumericUpDown.Select(0, AdjustedQ3InventoryNumericUpDown.Value.ToString().Length);
+                    break;
+                case "ADJUSTEDQ4OLDINVENTORYNUMERICUPDOWN":
+                    AdjustedQ4OldInventoryNumericUpDown.Select(0, AdjustedQ4OldInventoryNumericUpDown.Value.ToString().Length);
+                    break;
+                case "ADJUSTEDQ4NEWINVENTORYNUMERICUPDOWN":
+                    AdjustedQ4NewInventoryNumericUpDown.Select(0, AdjustedQ4NewInventoryNumericUpDown.Value.ToString().Length);
+                    break;
+                case "ADJUSTEDQ4TOTALINVENTORYNUMERICUPDOWN":
+                    AdjustedQ4TotalInventoryNumericUpDown.Select(0, AdjustedQ4TotalInventoryNumericUpDown.Value.ToString().Length);
+                    break;
+            } // switch
+        } //AdjustedQ1InventoryNumericUpDown_Enter
+        #endregion
+        #region "Private methods"
+        private void ResetForm()
+        {
+            UserInfoLabel.Text = String.Format("Last Updated User:{0}\nLast Update Date:{1}\nRevision#:{2}","KAKKS002", "09/09/17 14:22", "1");
+        } //ResetForm
+        #endregion        
+    } //frmProjectedInventory
 }

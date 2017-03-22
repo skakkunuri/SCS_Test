@@ -59,6 +59,7 @@
             this.AdjustedQ4TotalInventoryNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.CurrentQ4TotalInventoryNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.Q4TotalLabel = new System.Windows.Forms.Label();
+            this.UserInfoLabel = new System.Windows.Forms.TextBox();
             this.SearchGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CurrentQ1InventoryNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdjustedQ1InventoryNumericUpDown)).BeginInit();
@@ -77,13 +78,12 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(712, 31);
+            this.label1.Size = new System.Drawing.Size(630, 51);
             this.label1.TabIndex = 1;
             this.label1.Text = "Projected Inventory Adjustments";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -104,7 +104,7 @@
             // 
             this.Q1Label.AutoSize = true;
             this.Q1Label.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Q1Label.Location = new System.Drawing.Point(21, 155);
+            this.Q1Label.Location = new System.Drawing.Point(22, 176);
             this.Q1Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Q1Label.Name = "Q1Label";
             this.Q1Label.Size = new System.Drawing.Size(235, 14);
@@ -115,7 +115,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(311, 134);
+            this.label6.Location = new System.Drawing.Point(312, 155);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(172, 14);
@@ -126,7 +126,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(519, 134);
+            this.label7.Location = new System.Drawing.Point(520, 155);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(178, 14);
@@ -144,7 +144,7 @@
             this.SearchGroupBox.Controls.Add(this.FiscalYearCombo);
             this.SearchGroupBox.Controls.Add(this.GetInventorybutton);
             this.SearchGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.SearchGroupBox.Location = new System.Drawing.Point(6, 33);
+            this.SearchGroupBox.Location = new System.Drawing.Point(7, 54);
             this.SearchGroupBox.Name = "SearchGroupBox";
             this.SearchGroupBox.Size = new System.Drawing.Size(700, 86);
             this.SearchGroupBox.TabIndex = 0;
@@ -236,7 +236,7 @@
             // 
             this.Q2Label.AutoSize = true;
             this.Q2Label.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Q2Label.Location = new System.Drawing.Point(21, 183);
+            this.Q2Label.Location = new System.Drawing.Point(22, 204);
             this.Q2Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Q2Label.Name = "Q2Label";
             this.Q2Label.Size = new System.Drawing.Size(247, 14);
@@ -247,7 +247,7 @@
             // 
             this.Q3Label.AutoSize = true;
             this.Q3Label.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Q3Label.Location = new System.Drawing.Point(21, 211);
+            this.Q3Label.Location = new System.Drawing.Point(22, 232);
             this.Q3Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Q3Label.Name = "Q3Label";
             this.Q3Label.Size = new System.Drawing.Size(253, 14);
@@ -258,7 +258,7 @@
             // 
             this.Q4OldLabel.AutoSize = true;
             this.Q4OldLabel.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Q4OldLabel.Location = new System.Drawing.Point(21, 239);
+            this.Q4OldLabel.Location = new System.Drawing.Point(22, 260);
             this.Q4OldLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Q4OldLabel.Name = "Q4OldLabel";
             this.Q4OldLabel.Size = new System.Drawing.Size(246, 14);
@@ -268,10 +268,10 @@
             // SaveButton
             // 
             this.SaveButton.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveButton.Location = new System.Drawing.Point(411, 320);
+            this.SaveButton.Location = new System.Drawing.Point(412, 341);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(133, 32);
-            this.SaveButton.TabIndex = 13;
+            this.SaveButton.TabIndex = 19;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
@@ -280,10 +280,10 @@
             // 
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CloseButton.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseButton.Location = new System.Drawing.Point(560, 320);
+            this.CloseButton.Location = new System.Drawing.Point(561, 341);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(133, 32);
-            this.CloseButton.TabIndex = 14;
+            this.CloseButton.TabIndex = 20;
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
@@ -298,7 +298,7 @@
             0,
             0,
             0});
-            this.CurrentQ1InventoryNumericUpDown.Location = new System.Drawing.Point(314, 151);
+            this.CurrentQ1InventoryNumericUpDown.Location = new System.Drawing.Point(315, 172);
             this.CurrentQ1InventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -319,7 +319,7 @@
             0,
             0,
             0});
-            this.AdjustedQ1InventoryNumericUpDown.Location = new System.Drawing.Point(525, 151);
+            this.AdjustedQ1InventoryNumericUpDown.Location = new System.Drawing.Point(526, 172);
             this.AdjustedQ1InventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -330,6 +330,7 @@
             this.AdjustedQ1InventoryNumericUpDown.TabIndex = 3;
             this.AdjustedQ1InventoryNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.AdjustedQ1InventoryNumericUpDown.ThousandsSeparator = true;
+            this.AdjustedQ1InventoryNumericUpDown.Enter += new System.EventHandler(this.AdjustedQ1InventoryNumericUpDown_Enter);
             // 
             // AdjustedQ2InventoryNumericUpDown
             // 
@@ -340,7 +341,7 @@
             0,
             0,
             0});
-            this.AdjustedQ2InventoryNumericUpDown.Location = new System.Drawing.Point(525, 179);
+            this.AdjustedQ2InventoryNumericUpDown.Location = new System.Drawing.Point(526, 200);
             this.AdjustedQ2InventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -351,6 +352,7 @@
             this.AdjustedQ2InventoryNumericUpDown.TabIndex = 6;
             this.AdjustedQ2InventoryNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.AdjustedQ2InventoryNumericUpDown.ThousandsSeparator = true;
+            this.AdjustedQ2InventoryNumericUpDown.Enter += new System.EventHandler(this.AdjustedQ1InventoryNumericUpDown_Enter);
             // 
             // CurrentQ2InventoryNumericUpDown
             // 
@@ -362,7 +364,7 @@
             0,
             0,
             0});
-            this.CurrentQ2InventoryNumericUpDown.Location = new System.Drawing.Point(314, 179);
+            this.CurrentQ2InventoryNumericUpDown.Location = new System.Drawing.Point(315, 200);
             this.CurrentQ2InventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -383,7 +385,7 @@
             0,
             0,
             0});
-            this.AdjustedQ3InventoryNumericUpDown.Location = new System.Drawing.Point(525, 207);
+            this.AdjustedQ3InventoryNumericUpDown.Location = new System.Drawing.Point(526, 228);
             this.AdjustedQ3InventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -394,6 +396,7 @@
             this.AdjustedQ3InventoryNumericUpDown.TabIndex = 9;
             this.AdjustedQ3InventoryNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.AdjustedQ3InventoryNumericUpDown.ThousandsSeparator = true;
+            this.AdjustedQ3InventoryNumericUpDown.Enter += new System.EventHandler(this.AdjustedQ1InventoryNumericUpDown_Enter);
             // 
             // CurrentQ3InventoryNumericUpDown
             // 
@@ -405,7 +408,7 @@
             0,
             0,
             0});
-            this.CurrentQ3InventoryNumericUpDown.Location = new System.Drawing.Point(314, 207);
+            this.CurrentQ3InventoryNumericUpDown.Location = new System.Drawing.Point(315, 228);
             this.CurrentQ3InventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -426,7 +429,7 @@
             0,
             0,
             0});
-            this.AdjustedQ4OldInventoryNumericUpDown.Location = new System.Drawing.Point(525, 235);
+            this.AdjustedQ4OldInventoryNumericUpDown.Location = new System.Drawing.Point(526, 256);
             this.AdjustedQ4OldInventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -437,6 +440,7 @@
             this.AdjustedQ4OldInventoryNumericUpDown.TabIndex = 12;
             this.AdjustedQ4OldInventoryNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.AdjustedQ4OldInventoryNumericUpDown.ThousandsSeparator = true;
+            this.AdjustedQ4OldInventoryNumericUpDown.Enter += new System.EventHandler(this.AdjustedQ1InventoryNumericUpDown_Enter);
             // 
             // CurrentQ4OldInventoryNumericUpDown
             // 
@@ -448,7 +452,7 @@
             0,
             0,
             0});
-            this.CurrentQ4OldInventoryNumericUpDown.Location = new System.Drawing.Point(314, 235);
+            this.CurrentQ4OldInventoryNumericUpDown.Location = new System.Drawing.Point(315, 256);
             this.CurrentQ4OldInventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -469,7 +473,7 @@
             0,
             0,
             0});
-            this.AdjustedQ4NewInventoryNumericUpDown.Location = new System.Drawing.Point(526, 263);
+            this.AdjustedQ4NewInventoryNumericUpDown.Location = new System.Drawing.Point(527, 284);
             this.AdjustedQ4NewInventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -477,9 +481,10 @@
             65536});
             this.AdjustedQ4NewInventoryNumericUpDown.Name = "AdjustedQ4NewInventoryNumericUpDown";
             this.AdjustedQ4NewInventoryNumericUpDown.Size = new System.Drawing.Size(167, 22);
-            this.AdjustedQ4NewInventoryNumericUpDown.TabIndex = 17;
+            this.AdjustedQ4NewInventoryNumericUpDown.TabIndex = 15;
             this.AdjustedQ4NewInventoryNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.AdjustedQ4NewInventoryNumericUpDown.ThousandsSeparator = true;
+            this.AdjustedQ4NewInventoryNumericUpDown.Enter += new System.EventHandler(this.AdjustedQ1InventoryNumericUpDown_Enter);
             // 
             // CurrentQ4NewInventoryNumericUpDown
             // 
@@ -491,7 +496,7 @@
             0,
             0,
             0});
-            this.CurrentQ4NewInventoryNumericUpDown.Location = new System.Drawing.Point(315, 263);
+            this.CurrentQ4NewInventoryNumericUpDown.Location = new System.Drawing.Point(316, 284);
             this.CurrentQ4NewInventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -499,7 +504,7 @@
             65536});
             this.CurrentQ4NewInventoryNumericUpDown.Name = "CurrentQ4NewInventoryNumericUpDown";
             this.CurrentQ4NewInventoryNumericUpDown.Size = new System.Drawing.Size(167, 22);
-            this.CurrentQ4NewInventoryNumericUpDown.TabIndex = 16;
+            this.CurrentQ4NewInventoryNumericUpDown.TabIndex = 14;
             this.CurrentQ4NewInventoryNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.CurrentQ4NewInventoryNumericUpDown.ThousandsSeparator = true;
             // 
@@ -507,11 +512,11 @@
             // 
             this.Q4NewLabel.AutoSize = true;
             this.Q4NewLabel.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Q4NewLabel.Location = new System.Drawing.Point(22, 267);
+            this.Q4NewLabel.Location = new System.Drawing.Point(23, 288);
             this.Q4NewLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Q4NewLabel.Name = "Q4NewLabel";
             this.Q4NewLabel.Size = new System.Drawing.Size(249, 14);
-            this.Q4NewLabel.TabIndex = 15;
+            this.Q4NewLabel.TabIndex = 13;
             this.Q4NewLabel.Text = "Qtr-IV New (07/02/2017-09/29/2017)";
             // 
             // AdjustedQ4TotalInventoryNumericUpDown
@@ -523,7 +528,7 @@
             0,
             0,
             0});
-            this.AdjustedQ4TotalInventoryNumericUpDown.Location = new System.Drawing.Point(525, 291);
+            this.AdjustedQ4TotalInventoryNumericUpDown.Location = new System.Drawing.Point(526, 312);
             this.AdjustedQ4TotalInventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -531,9 +536,10 @@
             65536});
             this.AdjustedQ4TotalInventoryNumericUpDown.Name = "AdjustedQ4TotalInventoryNumericUpDown";
             this.AdjustedQ4TotalInventoryNumericUpDown.Size = new System.Drawing.Size(167, 22);
-            this.AdjustedQ4TotalInventoryNumericUpDown.TabIndex = 20;
+            this.AdjustedQ4TotalInventoryNumericUpDown.TabIndex = 18;
             this.AdjustedQ4TotalInventoryNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.AdjustedQ4TotalInventoryNumericUpDown.ThousandsSeparator = true;
+            this.AdjustedQ4TotalInventoryNumericUpDown.Enter += new System.EventHandler(this.AdjustedQ1InventoryNumericUpDown_Enter);
             // 
             // CurrentQ4TotalInventoryNumericUpDown
             // 
@@ -545,7 +551,7 @@
             0,
             0,
             0});
-            this.CurrentQ4TotalInventoryNumericUpDown.Location = new System.Drawing.Point(314, 291);
+            this.CurrentQ4TotalInventoryNumericUpDown.Location = new System.Drawing.Point(315, 312);
             this.CurrentQ4TotalInventoryNumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -553,7 +559,7 @@
             65536});
             this.CurrentQ4TotalInventoryNumericUpDown.Name = "CurrentQ4TotalInventoryNumericUpDown";
             this.CurrentQ4TotalInventoryNumericUpDown.Size = new System.Drawing.Size(167, 22);
-            this.CurrentQ4TotalInventoryNumericUpDown.TabIndex = 19;
+            this.CurrentQ4TotalInventoryNumericUpDown.TabIndex = 17;
             this.CurrentQ4TotalInventoryNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.CurrentQ4TotalInventoryNumericUpDown.ThousandsSeparator = true;
             // 
@@ -561,12 +567,28 @@
             // 
             this.Q4TotalLabel.AutoSize = true;
             this.Q4TotalLabel.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Q4TotalLabel.Location = new System.Drawing.Point(21, 295);
+            this.Q4TotalLabel.Location = new System.Drawing.Point(22, 316);
             this.Q4TotalLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Q4TotalLabel.Name = "Q4TotalLabel";
             this.Q4TotalLabel.Size = new System.Drawing.Size(257, 14);
-            this.Q4TotalLabel.TabIndex = 18;
+            this.Q4TotalLabel.TabIndex = 16;
             this.Q4TotalLabel.Text = "Qtr-IV Total (07/02/2017-09/29/2017)";
+            // 
+            // UserInfoLabel
+            // 
+            this.UserInfoLabel.BackColor = System.Drawing.SystemColors.InfoText;
+            this.UserInfoLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.UserInfoLabel.Enabled = false;
+            this.UserInfoLabel.Font = new System.Drawing.Font("Bookman Old Style", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserInfoLabel.ForeColor = System.Drawing.Color.GreenYellow;
+            this.UserInfoLabel.Location = new System.Drawing.Point(479, 0);
+            this.UserInfoLabel.Multiline = true;
+            this.UserInfoLabel.Name = "UserInfoLabel";
+            this.UserInfoLabel.Size = new System.Drawing.Size(230, 51);
+            this.UserInfoLabel.TabIndex = 22;
+            this.UserInfoLabel.TabStop = false;
+            this.UserInfoLabel.Text = "Last Updated User: KAKKS002\r\nLast Update Date: 09/09/17 14:22\r\nRevision#: 1\r\n";
+            this.UserInfoLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // frmProjectedInventory
             // 
@@ -574,7 +596,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CloseButton;
-            this.ClientSize = new System.Drawing.Size(712, 359);
+            this.ClientSize = new System.Drawing.Size(712, 382);
+            this.Controls.Add(this.UserInfoLabel);
             this.Controls.Add(this.AdjustedQ4TotalInventoryNumericUpDown);
             this.Controls.Add(this.CurrentQ4TotalInventoryNumericUpDown);
             this.Controls.Add(this.Q4TotalLabel);
@@ -658,5 +681,6 @@
         private System.Windows.Forms.NumericUpDown AdjustedQ4TotalInventoryNumericUpDown;
         private System.Windows.Forms.NumericUpDown CurrentQ4TotalInventoryNumericUpDown;
         private System.Windows.Forms.Label Q4TotalLabel;
+        private System.Windows.Forms.TextBox UserInfoLabel;
     }
 }

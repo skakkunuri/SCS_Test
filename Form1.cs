@@ -229,5 +229,11 @@ namespace SCS_Test
             this.Cursor = Cursors.Default;
         }
         #endregion
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            frmProjectedInventory newForm = new frmProjectedInventory();
+            newForm.Show();
+        }
     }
 }
