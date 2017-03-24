@@ -578,12 +578,12 @@
             // 
             this.UserInfoLabel.BackColor = System.Drawing.SystemColors.InfoText;
             this.UserInfoLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.UserInfoLabel.Enabled = false;
             this.UserInfoLabel.Font = new System.Drawing.Font("Bookman Old Style", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserInfoLabel.ForeColor = System.Drawing.Color.GreenYellow;
             this.UserInfoLabel.Location = new System.Drawing.Point(479, 0);
             this.UserInfoLabel.Multiline = true;
             this.UserInfoLabel.Name = "UserInfoLabel";
+            this.UserInfoLabel.ReadOnly = true;
             this.UserInfoLabel.Size = new System.Drawing.Size(230, 51);
             this.UserInfoLabel.TabIndex = 22;
             this.UserInfoLabel.TabStop = false;

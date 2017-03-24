@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,17 @@ namespace SCS_Test
         private void CloseButton_Click(object sender, EventArgs e)
         {
             //Dispose();
+            double op = 100;
+            while (op >= 10)
+            {
+                Opacity =  (op - 10)/100;
+                Debug.WriteLine(Opacity.ToString());
+                op -= 10;
+                Debug.WriteLine(op.ToString());
+                System.Threading.Thread.Sleep(25);
+                Refresh();
+                
+            }
             Application.Exit();
         }
 
@@ -88,7 +100,7 @@ namespace SCS_Test
         #region "Private methods"
         private void ResetForm()
         {
-            UserInfoLabel.Text = String.Format("Last Updated User:{0}\nLast Update Date:{1}\nRevision#:{2}","KAKKS002", "09/09/17 14:22", "1");
+            UserInfoLabel.Text = String.Format("Last Updated User:{0}\r\n Last Update Date:{1}\r\n Revision#:{2}", "KAKKS002", "09/09/17 14:22", "1");
         } //ResetForm
         #endregion        
     } //frmProjectedInventory
