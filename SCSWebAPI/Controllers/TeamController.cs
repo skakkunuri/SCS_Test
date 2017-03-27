@@ -27,5 +27,20 @@ namespace SCSWebAPI.Controllers
             activeTeams = team.GetAllTeamsData();
             return activeTeams;
         }
+
+        /// <summary>
+        /// Gets the all agencies by team id
+        /// </summary>
+        /// <param name="teamID"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("GetAgneciesByTeam")]
+        public IEnumerable<SCSDataAccess.Team> GetAgenciesByTeamID(int teamID)
+        {
+            SCSDataAccess.Team team = new SCSDataAccess.Team();
+            //activeTeams = team.GetAgenciesByTeamID(teamID);
+            return activeTeams;
+        }
+
     }
 }

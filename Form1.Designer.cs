@@ -63,7 +63,6 @@
             this.TeamComboBox.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TeamComboBox.FormattingEnabled = true;
             this.TeamComboBox.Items.AddRange(new object[] {
-            "NONE",
             "Team 1",
             "Team 2",
             "Team 3",
@@ -328,6 +327,7 @@
             this.DeleteButton.TabIndex = 7;
             this.DeleteButton.Text = "Inventory";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Visible = false;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // frmTeamAgencyAssignment

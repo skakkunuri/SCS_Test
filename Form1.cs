@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Threading;
 using SCSClient.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http.Formatting;
-using System.Diagnostics;
 
 namespace SCS_Test
 {
@@ -36,6 +32,13 @@ namespace SCS_Test
             LoadData();
             //SelectedCountLabel.Text = AllCountLabel.Text = "Count: 0";
         }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            frmProjectedInventory newForm = new frmProjectedInventory();
+            newForm.Show();
+        }
+
         /// <summary>
         /// When close button is clicked form will be closed
         /// </summary>
@@ -154,7 +157,7 @@ namespace SCS_Test
         private void LoadData()
         {
             // Get this data from database only once
-            GetAgencyData();
+            //GetAgencyData();
             GetAllTeamsInformation();
             GetGridRowCount();            
         }
@@ -230,10 +233,6 @@ namespace SCS_Test
         }
         #endregion
 
-        private void DeleteButton_Click(object sender, EventArgs e)
-        {
-            frmProjectedInventory newForm = new frmProjectedInventory();
-            newForm.Show();
-        }
+       
     }
 }
