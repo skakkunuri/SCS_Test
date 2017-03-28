@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System;
+using System.Collections;
 
 namespace SCSDataAccess
 {
@@ -12,17 +14,17 @@ namespace SCSDataAccess
     {
         public int TeamID { set; get; }
         public string Team_Desc { set; get; }
-        IEnumerable<AgencyTeam> Agencies { set; get; }
+        public IEnumerable<AgencyTeam> Agencies { set; get; }
     }// TeamAgency
 
     /// <summary>
     /// This class is only used by TeamAgency class
     /// </summary>
     public class AgencyTeam
-    {
+    { 
         public string Agency_Code { get; set; }
         public string Agency_Name { get; set; }
-        public string Active_Ind { get; set; }
+        public string Active_Ind { get; set; }        
     } //AgencyTeam
     
     public class Team
@@ -99,11 +101,13 @@ namespace SCSDataAccess
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandText = "GetAllAgenciesByTeam";
                         adpter.SelectCommand = cmd;
-                        SqlParameter paramTeamID = new SqlParameter();
-                        paramTeamID.SqlDbType = SqlDbType.Int;
-                        paramTeamID.Value = teamID;
-                        paramTeamID.Direction = ParameterDirection.Input;
-                        cmd.Parameters.Add(paramTeamID);
+                        cmd.Parameters.Add(new SqlParameter()
+                        {
+                            SqlDbType = SqlDbType.Int,
+                            Value = teamID,
+                            ParameterName = "@teamID",
+                            Direction = ParameterDirection.Input
+                        });
                         DataSet ds = new DataSet();
                         con.Open();
                         adpter.Fill(ds);
@@ -113,25 +117,28 @@ namespace SCSDataAccess
                         {
                             ds.Tables[0].TableName = "TeamTable";
                             ds.Tables[1].TableName = "TeamAgenciesTable";
-                            teamsAgencies = new TeamAgency();
-                            teamsAgencies.TeamID = teamID;
-                            if(ds.Tables["TeamTable"].Rows.Count > 0)
+                            teamsAgencies = new TeamAgency()
+                            {
+                                TeamID = teamID
+                            };
+                            if (ds.Tables["TeamTable"].Rows.Count > 0)
                                 teamsAgencies.Team_Desc = ds.Tables["TeamTable"].Rows[0].ToString();
                             if (ds.Tables["TeamAgenciesTable"].Rows.Count > 0)
                             {
-                                foreach(DataRow row in ds.Tables["TeamAgenciesTable"].Rows)
+                                List<AgencyTeam> tempAgencyTeam = new List<AgencyTeam>(); 
+                                foreach (DataRow row in ds.Tables["TeamAgenciesTable"].Rows)
                                 {
-                                    oneAgencyTeam = new AgencyTeam();
-                                    oneAgencyTeam.Agency_Code = row[0].ToString();
-                                    oneAgencyTeam.Agency_Name = row[1].ToString();
-                                    oneAgencyTeam.Active_Ind = row[2].ToString();                                    
+                                    oneAgencyTeam = new AgencyTeam()
+                                    {
+                                        Agency_Code = row[0].ToString(),
+                                        Agency_Name = row[1].ToString(),
+                                        Active_Ind = row[2].ToString()
+                                    };
+                                    tempAgencyTeam.Add(oneAgencyTeam);                                    
                                 } // foreach
+                                teamsAgencies.Agencies = tempAgencyTeam;
                             } // if second table
                         } // if ds
-                        
-
-                            
-
                     } // adapter 
                 } // Command
             } // connection

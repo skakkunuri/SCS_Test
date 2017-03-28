@@ -217,8 +217,15 @@ namespace SCS_Test
         private void LoadDataForSelectedTeam(string teamCode)
         {
             //Call the service to fetch the data already exists for the selected team.
-            //Thread.Sleep(5000);
-        }
+            Cursor = Cursors.WaitCursor;
+            HttpResponseMessage response = webAPIClient.GetAsync("Team/GetAgneciesByTeam").Result;
+            if(response.IsSuccessStatusCode)
+            {
+                TeamAgency teamAgency = response.Content.ReadAsAsync<TeamAgency>().Result;
+                
+            } // end if
+            Cursor = Cursors.Default;
+        } // LoadDataForSelectedTeam
         private void TeamComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;

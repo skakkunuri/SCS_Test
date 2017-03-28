@@ -35,11 +35,11 @@ namespace SCSWebAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [ActionName("GetAgneciesByTeam")]
-        public IEnumerable<SCSDataAccess.Team> GetAgenciesByTeamID(int teamID)
+        public SCSDataAccess.TeamAgency GetAgenciesByTeamID(int teamID)
         {
             SCSDataAccess.Team team = new SCSDataAccess.Team();
-            //activeTeams = team.GetAgenciesByTeamID(teamID);
-            return activeTeams;
+            SCSDataAccess.TeamAgency teamAgency = team.GetAgenciesByTeamID(teamID);
+            return teamAgency;
         }
 
     }
