@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TeamComboBox = new System.Windows.Forms.ComboBox();
             this.TeamSelectLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,7 +74,7 @@
             "Team 5",
             "Team 6",
             "Team 7"});
-            this.TeamComboBox.Location = new System.Drawing.Point(261, 42);
+            this.TeamComboBox.Location = new System.Drawing.Point(347, 37);
             this.TeamComboBox.Name = "TeamComboBox";
             this.TeamComboBox.Size = new System.Drawing.Size(204, 24);
             this.TeamComboBox.TabIndex = 1;
@@ -80,7 +84,7 @@
             // 
             this.TeamSelectLabel.AutoSize = true;
             this.TeamSelectLabel.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TeamSelectLabel.Location = new System.Drawing.Point(171, 46);
+            this.TeamSelectLabel.Location = new System.Drawing.Point(257, 41);
             this.TeamSelectLabel.Name = "TeamSelectLabel";
             this.TeamSelectLabel.Size = new System.Drawing.Size(89, 14);
             this.TeamSelectLabel.TabIndex = 0;
@@ -90,7 +94,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 15);
+            this.label1.Location = new System.Drawing.Point(9, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(190, 16);
             this.label1.TabIndex = 0;
@@ -111,7 +115,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(4, 67);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(645, 324);
+            this.groupBox1.Size = new System.Drawing.Size(807, 324);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Agencies";
@@ -120,7 +124,7 @@
             // 
             this.SelectedCountLabel.AutoSize = true;
             this.SelectedCountLabel.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectedCountLabel.Location = new System.Drawing.Point(369, 305);
+            this.SelectedCountLabel.Location = new System.Drawing.Point(453, 305);
             this.SelectedCountLabel.Name = "SelectedCountLabel";
             this.SelectedCountLabel.Size = new System.Drawing.Size(56, 16);
             this.SelectedCountLabel.TabIndex = 11;
@@ -130,7 +134,7 @@
             // 
             this.AllCountLabel.AutoSize = true;
             this.AllCountLabel.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AllCountLabel.Location = new System.Drawing.Point(11, 305);
+            this.AllCountLabel.Location = new System.Drawing.Point(9, 305);
             this.AllCountLabel.Name = "AllCountLabel";
             this.AllCountLabel.Size = new System.Drawing.Size(56, 16);
             this.AllCountLabel.TabIndex = 10;
@@ -141,17 +145,33 @@
             this.SelectedAgencyDataGridView.AllowUserToAddRows = false;
             this.SelectedAgencyDataGridView.AllowUserToDeleteRows = false;
             this.SelectedAgencyDataGridView.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SelectedAgencyDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.SelectedAgencyDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
-            this.SelectedAgencyDataGridView.Location = new System.Drawing.Point(372, 34);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.SelectedAgencyDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.SelectedAgencyDataGridView.Location = new System.Drawing.Point(453, 34);
             this.SelectedAgencyDataGridView.Name = "SelectedAgencyDataGridView";
             this.SelectedAgencyDataGridView.ReadOnly = true;
             this.SelectedAgencyDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.SelectedAgencyDataGridView.RowHeadersVisible = false;
             this.SelectedAgencyDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.SelectedAgencyDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.SelectedAgencyDataGridView.Size = new System.Drawing.Size(266, 268);
+            this.SelectedAgencyDataGridView.Size = new System.Drawing.Size(349, 268);
             this.SelectedAgencyDataGridView.TabIndex = 9;
             this.SelectedAgencyDataGridView.SelectionChanged += new System.EventHandler(this.SelectedAgencyDataGridView_SelectionChanged);
             // 
@@ -174,17 +194,33 @@
             this.AllActiveAgencyDataGridView.AllowUserToAddRows = false;
             this.AllActiveAgencyDataGridView.AllowUserToDeleteRows = false;
             this.AllActiveAgencyDataGridView.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.AllActiveAgencyDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.AllActiveAgencyDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AgencyCode,
             this.AgencyName});
-            this.AllActiveAgencyDataGridView.Location = new System.Drawing.Point(13, 34);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.AllActiveAgencyDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            this.AllActiveAgencyDataGridView.Location = new System.Drawing.Point(9, 34);
             this.AllActiveAgencyDataGridView.Name = "AllActiveAgencyDataGridView";
             this.AllActiveAgencyDataGridView.ReadOnly = true;
             this.AllActiveAgencyDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.AllActiveAgencyDataGridView.RowHeadersVisible = false;
             this.AllActiveAgencyDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.AllActiveAgencyDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AllActiveAgencyDataGridView.Size = new System.Drawing.Size(266, 268);
+            this.AllActiveAgencyDataGridView.Size = new System.Drawing.Size(349, 268);
             this.AllActiveAgencyDataGridView.TabIndex = 8;
             this.AllActiveAgencyDataGridView.SelectionChanged += new System.EventHandler(this.AllActiveAgencyDataGridView_SelectionChanged);
             // 
@@ -208,7 +244,7 @@
             this.MoveAllToSelectedButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.MoveAllToSelectedButton.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoveAllToSelectedButton.ForeColor = System.Drawing.Color.White;
-            this.MoveAllToSelectedButton.Location = new System.Drawing.Point(288, 109);
+            this.MoveAllToSelectedButton.Location = new System.Drawing.Point(368, 104);
             this.MoveAllToSelectedButton.Name = "MoveAllToSelectedButton";
             this.MoveAllToSelectedButton.Size = new System.Drawing.Size(75, 23);
             this.MoveAllToSelectedButton.TabIndex = 2;
@@ -222,7 +258,7 @@
             this.MoveOneToAllbutton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.MoveOneToAllbutton.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoveOneToAllbutton.ForeColor = System.Drawing.Color.White;
-            this.MoveOneToAllbutton.Location = new System.Drawing.Point(288, 167);
+            this.MoveOneToAllbutton.Location = new System.Drawing.Point(368, 162);
             this.MoveOneToAllbutton.Name = "MoveOneToAllbutton";
             this.MoveOneToAllbutton.Size = new System.Drawing.Size(75, 23);
             this.MoveOneToAllbutton.TabIndex = 4;
@@ -236,7 +272,7 @@
             this.MoveOneToSelectedButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.MoveOneToSelectedButton.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoveOneToSelectedButton.ForeColor = System.Drawing.Color.White;
-            this.MoveOneToSelectedButton.Location = new System.Drawing.Point(288, 138);
+            this.MoveOneToSelectedButton.Location = new System.Drawing.Point(368, 133);
             this.MoveOneToSelectedButton.Name = "MoveOneToSelectedButton";
             this.MoveOneToSelectedButton.Size = new System.Drawing.Size(75, 23);
             this.MoveOneToSelectedButton.TabIndex = 3;
@@ -250,7 +286,7 @@
             this.MoveSelectedToAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.MoveSelectedToAllButton.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoveSelectedToAllButton.ForeColor = System.Drawing.Color.White;
-            this.MoveSelectedToAllButton.Location = new System.Drawing.Point(288, 196);
+            this.MoveSelectedToAllButton.Location = new System.Drawing.Point(368, 191);
             this.MoveSelectedToAllButton.Name = "MoveSelectedToAllButton";
             this.MoveSelectedToAllButton.Size = new System.Drawing.Size(75, 23);
             this.MoveSelectedToAllButton.TabIndex = 5;
@@ -262,7 +298,7 @@
             // 
             this.SelectedAgencyNameLabel.AutoSize = true;
             this.SelectedAgencyNameLabel.Font = new System.Drawing.Font("Bookman Old Style", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SelectedAgencyNameLabel.Location = new System.Drawing.Point(369, 15);
+            this.SelectedAgencyNameLabel.Location = new System.Drawing.Point(453, 15);
             this.SelectedAgencyNameLabel.Name = "SelectedAgencyNameLabel";
             this.SelectedAgencyNameLabel.Size = new System.Drawing.Size(133, 16);
             this.SelectedAgencyNameLabel.TabIndex = 6;
@@ -275,26 +311,28 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label3.Location = new System.Drawing.Point(-3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(669, 28);
+            this.label3.Size = new System.Drawing.Size(814, 28);
             this.label3.TabIndex = 5;
             this.label3.Text = "Team and Agency assignment";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // SaveButton
             // 
+            this.SaveButton.Enabled = false;
             this.SaveButton.Font = new System.Drawing.Font("Bookman Old Style", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveButton.Location = new System.Drawing.Point(445, 397);
+            this.SaveButton.Location = new System.Drawing.Point(595, 397);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(99, 25);
             this.SaveButton.TabIndex = 3;
             this.SaveButton.Text = "&Save";
             this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // CloseButton
             // 
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CloseButton.Font = new System.Drawing.Font("Bookman Old Style", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseButton.Location = new System.Drawing.Point(550, 397);
+            this.CloseButton.Location = new System.Drawing.Point(700, 397);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(99, 25);
             this.CloseButton.TabIndex = 4;
@@ -308,7 +346,7 @@
             this.StatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 426);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(656, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(811, 22);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -335,7 +373,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CloseButton;
-            this.ClientSize = new System.Drawing.Size(656, 448);
+            this.ClientSize = new System.Drawing.Size(811, 448);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.CloseButton);

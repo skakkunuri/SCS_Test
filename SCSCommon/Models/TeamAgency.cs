@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SCSClient.Models
+namespace SCSCommon.Models
 {
 
     /// <summary>
@@ -10,7 +10,7 @@ namespace SCSClient.Models
     {
         public int TeamID { set; get; }
         public string Team_Desc { set; get; }
-        IEnumerable<AgencyTeam> Agencies { set; get; }
+        public List<AgencyTeam> Agencies { set; get; }
     }// TeamAgency
 
     /// <summary>

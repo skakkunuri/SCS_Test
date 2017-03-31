@@ -65,9 +65,6 @@
     <Compile Include="frmProjectedInventory.Designer.cs">
       <DependentUpon>frmProjectedInventory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Agency.cs" />
-    <Compile Include="Models\Team.cs" />
-    <Compile Include="Models\TeamAgency.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -99,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="SCSCommon\SCSCommon.csproj">
+      <Project>{760adc54-5a03-454c-891d-caba44fbf29b}</Project>
+      <Name>SCSCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,9 +1,10 @@
-﻿using System;
+﻿#define DEBUG
+using System;
 using System.Windows.Forms;
-using SCSClient.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
+using SCSCommon.Models;
 
 namespace SCS_Test
 {
@@ -11,6 +12,7 @@ namespace SCS_Test
     {
         #region "Private veriables"
         static HttpClient webAPIClient = new HttpClient();
+        bool isFormLoadCompleted = false;
         #endregion
 
         public frmTeamAgencyAssignment()
@@ -28,9 +30,11 @@ namespace SCS_Test
             //Initial the service
             webAPIClient.BaseAddress = new Uri("http://localhost:61583/api/");
             webAPIClient.DefaultRequestHeaders.Accept.Clear();
-            webAPIClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));            
-            LoadData();
+            webAPIClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            GetAllTeamsInformation();
+            //LoadData();
             //SelectedCountLabel.Text = AllCountLabel.Text = "Count: 0";
+            isFormLoadCompleted = true;
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -46,7 +50,8 @@ namespace SCS_Test
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //this.Close();
+            Application.Exit();
         }
         /// <summary>
         /// Will move all the rows from All to selected section.
@@ -59,10 +64,11 @@ namespace SCS_Test
                 return;
 
             AllActiveAgencyDataGridView.SelectAll();
-            MoveRowsBetweenGridViews(AllActiveAgencyDataGridView,SelectedAgencyDataGridView);
+            MoveRowsBetweenGridViews(AllActiveAgencyDataGridView, SelectedAgencyDataGridView);
             AllActiveAgencyDataGridView.Rows.Clear();
             MoveAllToSelectedButton.Enabled = false;
             GetGridRowCount();
+            SaveButton.Enabled = true;
         }
         /// <summary>
         /// Move selected items from Selected to All Active grid
@@ -80,6 +86,7 @@ namespace SCS_Test
             SelectedAgencyDataGridView.Rows.Clear();
             MoveSelectedToAllButton.Enabled = false;
             GetGridRowCount();
+            SaveButton.Enabled = true;
         }
         /// <summary>
         /// Move selected item from All Active to SelectedAgencyDataGridView
@@ -93,7 +100,8 @@ namespace SCS_Test
                 MessageBox.Show("No rows selected", "No rows", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            MoveRowsBetweenGridViews(AllActiveAgencyDataGridView, SelectedAgencyDataGridView,true);           
+            MoveRowsBetweenGridViews(AllActiveAgencyDataGridView, SelectedAgencyDataGridView,true);
+            SaveButton.Enabled = true;
         }
         /// <summary>
         /// This event filed when the row selection of All Active grid changed to make sure that we are disabling all the buttons properly
@@ -123,14 +131,8 @@ namespace SCS_Test
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MoveOneToAllbutton_Click(object sender, EventArgs e)
-        {
-            //if (AllActiveAgencyDataGridView.SelectedRows.Count <= 0)
-            //{
-            //    MessageBox.Show("No rows selected", "No rows", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    return;
-            //}
-            for (int rowIndex = 0; rowIndex <= SelectedAgencyDataGridView.SelectedRows.Count - 1; rowIndex++)
-            {
+        {           
+            for (int rowIndex = 0; rowIndex <= SelectedAgencyDataGridView.SelectedRows.Count - 1; rowIndex++)         
                 foreach (DataGridViewRow row in SelectedAgencyDataGridView.SelectedRows)
                 {
                     string agencyCode = row.Cells[0].Value.ToString();
@@ -140,8 +142,10 @@ namespace SCS_Test
                     // Delete from source grid
                     SelectedAgencyDataGridView.Rows.RemoveAt(row.Index);
                 }
-            }// end
-        }
+            SaveButton.Enabled = true;
+        }// end MoveOneToAllbutton_Click
+
+
         #endregion
 
         #region "Private methods"
@@ -214,32 +218,71 @@ namespace SCS_Test
                     sourceGridView.Rows.RemoveAt(row.Index);
             }//end for
         }
-        private void LoadDataForSelectedTeam(string teamCode)
+        private void LoadDataForSelectedTeam(int teamID)
         {
-            //Call the service to fetch the data already exists for the selected team.
-            Cursor = Cursors.WaitCursor;
-            HttpResponseMessage response = webAPIClient.GetAsync("Team/GetAgneciesByTeam").Result;
+            //Call the service to fetch the data already exists for the selected team.            
+            try
+            {            
+                HttpResponseMessage response = webAPIClient.GetAsync("Team/GetAgneciesByTeam?teamID=" +  teamID.ToString()).Result;
+                if(response.IsSuccessStatusCode)
+                {
+                    TeamAgency teamAgency = response.Content.ReadAsAsync<TeamAgency>().Result;
+                    SelectedAgencyDataGridView.Rows.Clear();
+                    // Check if we have any agencies for this team then only process the data.
+                    if (teamAgency.Agencies != null && teamAgency.Agencies.Count > 0)
+                        foreach (AgencyTeam at in teamAgency.Agencies)                        
+                            SelectedAgencyDataGridView.Rows.Add(at.Agency_Code, at.Agency_Name);                        
+                    else
+                        MessageBox.Show("No agencies assigned to this team", "SCS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //SelectedAgencyDataGridView.
+                } // end if                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Oooopps... Something is not correct. Please contact systems support team", "SCS",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Cursor = Cursors.Default;
+#if (DEBUG)
+                MessageBox.Show(ex.StackTrace.ToString());// Do not show this to the user.
+#endif
+            }
+        } // LoadDataForSelectedTeam
+        private void LoadUnassingedAgencies()
+        {
+            AllActiveAgencyDataGridView.Rows.Clear();
+            HttpResponseMessage response = webAPIClient.GetAsync("Agency/GetAllUnassingedActiveAgencies").Result;
             if(response.IsSuccessStatusCode)
             {
-                TeamAgency teamAgency = response.Content.ReadAsAsync<TeamAgency>().Result;
-                
-            } // end if
-            Cursor = Cursors.Default;
-        } // LoadDataForSelectedTeam
+                List<AgencyTeam> unassignedAgencies = response.Content.ReadAsAsync<List<AgencyTeam>>().Result;
+                if (unassignedAgencies != null && unassignedAgencies.Count > 0) // if we have any active unassigned agencies in the system                
+                    foreach (AgencyTeam agency in unassignedAgencies)
+                        AllActiveAgencyDataGridView.Rows.Add(agency.Agency_Code, agency.Agency_Name);
+                else
+                    StatusLabel.Text = "No unassigned active agencies found!!!";
+            } // if response         
+        } // end of LoadUnassingedAgencies()
         private void TeamComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!isFormLoadCompleted)
+                return;
             this.Cursor = Cursors.WaitCursor;
             //Debug.WriteLine("Selected value  = " + TeamComboBox.SelectedValue.ToString() + " Text = " +  TeamComboBox.Text.ToString());
             StatusLabel.Text = "Working...Please wait...";
             Refresh();
             SelectedAgencyNameLabel.Text = (TeamComboBox.Text.Equals("NONE")) ?
-                "Agencies not assigned to any team" : string.Format("Selected agencies for {0} team", TeamComboBox.Text);
-            LoadDataForSelectedTeam(TeamComboBox.Text.ToString());            
+                "Agencies not assigned to any team" : string.Format("Selected agencies for {0} team", TeamComboBox.Text);            
+            int tempID = (int)TeamComboBox.SelectedValue; 
+            LoadDataForSelectedTeam(tempID);
+            LoadUnassingedAgencies();
+            GetGridRowCount();
             StatusLabel.Text = "Ready";
             this.Cursor = Cursors.Default;
         }
         #endregion
 
-       
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Data saved successfully!!!","SCS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SaveButton.Enabled = false;
+        }
     }
 }

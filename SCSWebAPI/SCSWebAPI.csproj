@@ -85,12 +85,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Team.cs" />
-    <Compile Include="Models\TeamAgency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +105,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SCSCommon\SCSCommon.csproj">
+      <Project>{760adc54-5a03-454c-891d-caba44fbf29b}</Project>
+      <Name>SCSCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SCSDataAccess\SCSDataAccess.csproj">
       <Project>{739f0436-9bcd-4c76-9c0e-66d8f0218e17}</Project>
       <Name>SCSDataAccess</Name>

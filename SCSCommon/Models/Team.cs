@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SCSWebAPI.Models
+namespace SCSCommon.Models
 {
     public class Team
     {

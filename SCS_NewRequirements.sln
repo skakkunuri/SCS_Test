@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCS_UI", "SCS_UI.csproj", "{719FE323-F013-43FA-9427-CDD40D58885B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCSWebAPI", "SCSWebAPI\SCSWebAPI.csproj", "{6F5EE52F-4903-4CA2-B881-3B9343783F4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCSDataAccess", "SCSDataAccess\SCSDataAccess.csproj", "{739F0436-9BCD-4C76-9C0E-66D8F0218E17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCSCommon", "SCSCommon\SCSCommon.csproj", "{760ADC54-5A03-454C-891D-CABA44FBF29B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{739F0436-9BCD-4C76-9C0E-66D8F0218E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{739F0436-9BCD-4C76-9C0E-66D8F0218E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{739F0436-9BCD-4C76-9C0E-66D8F0218E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760ADC54-5A03-454C-891D-CABA44FBF29B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760ADC54-5A03-454C-891D-CABA44FBF29B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760ADC54-5A03-454C-891D-CABA44FBF29B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760ADC54-5A03-454C-891D-CABA44FBF29B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

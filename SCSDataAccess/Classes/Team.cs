@@ -2,31 +2,13 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-using System;
-using System.Collections;
-
+using SCSCommon.Models;
 namespace SCSDataAccess
 {
     /// <summary>
     /// This class is used to get the data for a team and it's related agencies 
-    /// </summary>
-    public class TeamAgency
-    {
-        public int TeamID { set; get; }
-        public string Team_Desc { set; get; }
-        public IEnumerable<AgencyTeam> Agencies { set; get; }
-    }// TeamAgency
+    /// </summary>    
 
-    /// <summary>
-    /// This class is only used by TeamAgency class
-    /// </summary>
-    public class AgencyTeam
-    { 
-        public string Agency_Code { get; set; }
-        public string Agency_Name { get; set; }
-        public string Active_Ind { get; set; }        
-    } //AgencyTeam
-    
     public class Team
     {
         #region "READONLY Variables"
@@ -72,13 +54,7 @@ namespace SCSDataAccess
                         } //if 
                     } // adapter
                 } // command
-            } // connection
-            // Also add NONE as one of the options to choose
-            oneTeam = new Team();
-            oneTeam.Team_ID = 0;
-            oneTeam.Team_Desc = "NONE";
-            oneTeam.Active_Ind = "A";
-            teamList.Add(oneTeam);
+            } // connection            
             return teamList;
         }
 
@@ -122,7 +98,7 @@ namespace SCSDataAccess
                                 TeamID = teamID
                             };
                             if (ds.Tables["TeamTable"].Rows.Count > 0)
-                                teamsAgencies.Team_Desc = ds.Tables["TeamTable"].Rows[0].ToString();
+                                teamsAgencies.Team_Desc = ds.Tables["TeamTable"].Rows[0]["TEAM_DESC"].ToString();
                             if (ds.Tables["TeamAgenciesTable"].Rows.Count > 0)
                             {
                                 List<AgencyTeam> tempAgencyTeam = new List<AgencyTeam>(); 
@@ -143,8 +119,7 @@ namespace SCSDataAccess
                 } // Command
             } // connection
                 return teamsAgencies;
-        }
-
+        } // end GetAgenciesByTeamID
         #endregion
     } // Team
-}
+} // namespace

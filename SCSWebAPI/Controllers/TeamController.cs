@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using SCSCommon.Models;
+
 namespace SCSWebAPI.Controllers
 {
     public class TeamController : ApiController
@@ -35,10 +37,10 @@ namespace SCSWebAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [ActionName("GetAgneciesByTeam")]
-        public SCSDataAccess.TeamAgency GetAgenciesByTeamID(int teamID)
+        public TeamAgency GetAgenciesByTeamID(int teamID)
         {
             SCSDataAccess.Team team = new SCSDataAccess.Team();
-            SCSDataAccess.TeamAgency teamAgency = team.GetAgenciesByTeamID(teamID);
+            TeamAgency teamAgency = team.GetAgenciesByTeamID(teamID);
             return teamAgency;
         }
 
