@@ -5,12 +5,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
 using SCSCommon.Models;
+using System.Linq;
 
 namespace SCS_Test
 {
     public partial class frmTeamAgencyAssignment : Form
     {
-        #region "Private veriables"
+        #region "Private variables"
         static HttpClient webAPIClient = new HttpClient();
         bool isFormLoadCompleted = false;
         #endregion
@@ -20,6 +21,21 @@ namespace SCS_Test
             InitializeComponent();
         }
         #region "All form events"
+        /// <summary>
+        /// Form load event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <summary>
+        /// Form load event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <summary>
+        /// <summary>
+        /// <summary>
+        /// <summary>
+        /// <summary>
         /// <summary>
         /// Form load event
         /// </summary>
@@ -144,8 +160,38 @@ namespace SCS_Test
                 }
             SaveButton.Enabled = true;
         }// end MoveOneToAllbutton_Click
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Data saved successfully!!!", "SCS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SaveButton.Enabled = false;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TeamComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isFormLoadCompleted)
+                return;
+            this.Cursor = Cursors.WaitCursor;
+            //Debug.WriteLine("Selected value  = " + TeamComboBox.SelectedValue.ToString() + " Text = " +  TeamComboBox.Text.ToString());
+            StatusLabel.Text = "Working...Please wait...";
+            Refresh();
+            SelectedAgencyNameLabel.Text = (TeamComboBox.Text.Equals("NONE")) ?
+                "Agencies not assigned to any team" : string.Format("Selected agencies for {0} team", TeamComboBox.Text);
+            int tempID = (int)TeamComboBox.SelectedValue;
+            LoadDataForSelectedTeam(tempID);
+            LoadUnassingedAgencies();
+            GetGridRowCount();
+            StatusLabel.Text = "Ready";
+            this.Cursor = Cursors.Default;
+        }
         #endregion
 
         #region "Private methods"
@@ -205,6 +251,12 @@ namespace SCS_Test
             AllActiveAgencyDataGridView.Rows.Add("AMAG14", "AMER MEDIA ADVOCACY14");
             AllActiveAgencyDataGridView.Rows.Add("AMAG15", "AMER MEDIA ADVOCACY15");
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceGridView"></param>
+        /// <param name="destinationGridView"></param>
+        /// <param name="isMove"></param>
         private void MoveRowsBetweenGridViews(DataGridView sourceGridView, DataGridView destinationGridView, bool isMove = false)
         {
             if (sourceGridView.SelectedRows.Count <= 0)
@@ -218,6 +270,10 @@ namespace SCS_Test
                     sourceGridView.Rows.RemoveAt(row.Index);
             }//end for
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="teamID"></param>
         private void LoadDataForSelectedTeam(int teamID)
         {
             //Call the service to fetch the data already exists for the selected team.            
@@ -230,8 +286,9 @@ namespace SCS_Test
                     SelectedAgencyDataGridView.Rows.Clear();
                     // Check if we have any agencies for this team then only process the data.
                     if (teamAgency.Agencies != null && teamAgency.Agencies.Count > 0)
-                        foreach (AgencyTeam at in teamAgency.Agencies)                        
-                            SelectedAgencyDataGridView.Rows.Add(at.Agency_Code, at.Agency_Name);                        
+                        SelectedAgencyDataGridView.DataSource = teamAgency;
+                        //foreach (AgencyTeam at in teamAgency.Agencies)                        
+                        //    SelectedAgencyDataGridView.Rows.Add(at.Agency_Code, at.Agency_Name);                        
                     else
                         MessageBox.Show("No agencies assigned to this team", "SCS", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //SelectedAgencyDataGridView.
@@ -246,43 +303,55 @@ namespace SCS_Test
 #endif
             }
         } // LoadDataForSelectedTeam
+        List<AgencyTeam> unassignedAgencies;
+        /// <summary>
+        /// 
+        /// </summary>
         private void LoadUnassingedAgencies()
         {
             AllActiveAgencyDataGridView.Rows.Clear();
             HttpResponseMessage response = webAPIClient.GetAsync("Agency/GetAllUnassingedActiveAgencies").Result;
             if(response.IsSuccessStatusCode)
             {
-                List<AgencyTeam> unassignedAgencies = response.Content.ReadAsAsync<List<AgencyTeam>>().Result;
-                if (unassignedAgencies != null && unassignedAgencies.Count > 0) // if we have any active unassigned agencies in the system                
-                    foreach (AgencyTeam agency in unassignedAgencies)
-                        AllActiveAgencyDataGridView.Rows.Add(agency.Agency_Code, agency.Agency_Name);
+                
+                unassignedAgencies = response.Content.ReadAsAsync<List<AgencyTeam>>().Result;
+                if (unassignedAgencies != null && unassignedAgencies.Count > 0) // if we have any active unassigned agencies in the system
+                    AllActiveAgencyDataGridView.DataSource = unassignedAgencies;
+
+
+                //if (unassignedAgencies != null && unassignedAgencies.Count > 0) // if we have any active unassigned agencies in the system                
+                //    foreach (AgencyTeam agency in unassignedAgencies)
+                //        AllActiveAgencyDataGridView.Rows.Add(agency.Agency_Code, agency.Agency_Name);
                 else
                     StatusLabel.Text = "No unassigned active agencies found!!!";
             } // if response         
         } // end of LoadUnassingedAgencies()
-        private void TeamComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!isFormLoadCompleted)
-                return;
-            this.Cursor = Cursors.WaitCursor;
-            //Debug.WriteLine("Selected value  = " + TeamComboBox.SelectedValue.ToString() + " Text = " +  TeamComboBox.Text.ToString());
-            StatusLabel.Text = "Working...Please wait...";
-            Refresh();
-            SelectedAgencyNameLabel.Text = (TeamComboBox.Text.Equals("NONE")) ?
-                "Agencies not assigned to any team" : string.Format("Selected agencies for {0} team", TeamComboBox.Text);            
-            int tempID = (int)TeamComboBox.SelectedValue; 
-            LoadDataForSelectedTeam(tempID);
-            LoadUnassingedAgencies();
-            GetGridRowCount();
-            StatusLabel.Text = "Ready";
-            this.Cursor = Cursors.Default;
-        }
+
         #endregion
 
-        private void SaveButton_Click(object sender, EventArgs e)
+
+        private void SearchAllTextBox_TextChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("Data saved successfully!!!","SCS", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            SaveButton.Enabled = false;
+            if (SearchAllTextBox.Text.Trim().Length > 0)
+            {
+                SearchAllClearButton.Enabled = true;
+                IEnumerable<AgencyTeam> filteredData =  unassignedAgencies.Where(p => p.Agency_Name.ToUpper().Contains(SearchAllTextBox.Text.Trim().ToUpper()));
+                AllActiveAgencyDataGridView.DataSource = filteredData;
+            } //end if
+            else
+                SearchAllClearButton.Enabled = false;
+        }
+
+        private void SearchAllClearButton_Click(object sender, EventArgs e)
+        {
+            SearchAllTextBox.Text = "";
+            SearchAllClearButton.Enabled = false;
+        }
+
+        private void SearchSelectedClearButton_Click(object sender, EventArgs e)
+        {
+            SearchAgencyTextbox.Text = "";
+            SearchSelectedClearButton.Enabled = false;
         }
     }
 }
