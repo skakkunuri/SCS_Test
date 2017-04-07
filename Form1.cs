@@ -282,10 +282,10 @@ namespace SCS_Test
                 HttpResponseMessage response = webAPIClient.GetAsync("Team/GetAgneciesByTeam?teamID=" +  teamID.ToString()).Result;
                 if(response.IsSuccessStatusCode)
                 {
-                    TeamAgency teamAgency = response.Content.ReadAsAsync<TeamAgency>().Result;
-                    SelectedAgencyDataGridView.Rows.Clear();
+                    List<AgencyTeam> teamAgency = response.Content.ReadAsAsync<List<AgencyTeam>>().Result;
+                    //SelectedAgencyDataGridView.Rows.Clear();
                     // Check if we have any agencies for this team then only process the data.
-                    if (teamAgency.Agencies != null && teamAgency.Agencies.Count > 0)
+                    if (teamAgency != null && teamAgency.Count > 0)
                         SelectedAgencyDataGridView.DataSource = teamAgency;
                         //foreach (AgencyTeam at in teamAgency.Agencies)                        
                         //    SelectedAgencyDataGridView.Rows.Add(at.Agency_Code, at.Agency_Name);                        
@@ -309,7 +309,7 @@ namespace SCS_Test
         /// </summary>
         private void LoadUnassingedAgencies()
         {
-            AllActiveAgencyDataGridView.Rows.Clear();
+            //AllActiveAgencyDataGridView.Rows.Clear();
             HttpResponseMessage response = webAPIClient.GetAsync("Agency/GetAllUnassingedActiveAgencies").Result;
             if(response.IsSuccessStatusCode)
             {

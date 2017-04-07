@@ -37,10 +37,10 @@ namespace SCSWebAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [ActionName("GetAgneciesByTeam")]
-        public TeamAgency GetAgenciesByTeamID(int teamID)
+        public List<AgencyTeam> GetAgenciesByTeamID(int teamID)
         {
             SCSDataAccess.Team team = new SCSDataAccess.Team();
-            TeamAgency teamAgency = team.GetAgenciesByTeamID(teamID);
+            List<AgencyTeam> teamAgency = team.GetAgenciesByTeamID(teamID);
             return teamAgency;
         }
 

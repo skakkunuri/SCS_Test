@@ -63,9 +63,9 @@ namespace SCSDataAccess
         /// </summary>
         /// <param name="teamID"></param>
         /// <returns></returns>
-        public TeamAgency GetAgenciesByTeamID(int teamID)
+        public List<AgencyTeam> GetAgenciesByTeamID(int teamID)
         {
-            TeamAgency teamsAgencies = null;
+            List<AgencyTeam> teamsAgencies = new List<AgencyTeam>();
             AgencyTeam oneAgencyTeam = null;
             using (SqlConnection con = new SqlConnection(CONNECTIONSTRING))
             {
@@ -91,17 +91,13 @@ namespace SCSDataAccess
 
                         if(ds.Tables.Count > 0 )
                         {
-                            ds.Tables[0].TableName = "TeamTable";
-                            ds.Tables[1].TableName = "TeamAgenciesTable";
-                            teamsAgencies = new TeamAgency()
-                            {
-                                TeamID = teamID
-                            };
-                            if (ds.Tables["TeamTable"].Rows.Count > 0)
-                                teamsAgencies.Team_Desc = ds.Tables["TeamTable"].Rows[0]["TEAM_DESC"].ToString();
+                            ds.Tables[0].TableName = "TeamTable"; // Ignore this value for now
+                            ds.Tables[1].TableName = "TeamAgenciesTable";                            
+                            //if (ds.Tables["TeamTable"].Rows.Count > 0)
+                            //    teamsAgencies.Team_Desc = ds.Tables["TeamTable"].Rows[0]["TEAM_DESC"].ToString();
                             if (ds.Tables["TeamAgenciesTable"].Rows.Count > 0)
                             {
-                                List<AgencyTeam> tempAgencyTeam = new List<AgencyTeam>(); 
+
                                 foreach (DataRow row in ds.Tables["TeamAgenciesTable"].Rows)
                                 {
                                     oneAgencyTeam = new AgencyTeam()
@@ -110,9 +106,9 @@ namespace SCSDataAccess
                                         Agency_Name = row[1].ToString(),
                                         Active_Ind = row[2].ToString()
                                     };
-                                    tempAgencyTeam.Add(oneAgencyTeam);                                    
+                                    teamsAgencies.Add(oneAgencyTeam);                                    
                                 } // foreach
-                                teamsAgencies.Agencies = tempAgencyTeam;
+                                //teamsAgencies.Agencies = tempAgencyTeam;
                             } // if second table
                         } // if ds
                     } // adapter 
