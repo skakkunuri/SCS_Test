@@ -14,6 +14,10 @@ namespace SCS_Test
         #region "Private variables"
         static HttpClient webAPIClient = new HttpClient();
         bool isFormLoadCompleted = false;
+        List<AgencyTeam> unassignedAgencies;
+        List<AgencyTeam> teamAgency;
+        List<AgencyTeam> tempUnassignedAgencies;
+        List<AgencyTeam> tempTeamAgency;
         #endregion
 
         public frmTeamAgencyAssignment()
@@ -21,22 +25,6 @@ namespace SCS_Test
             InitializeComponent();
         }
         #region "All form events"
-        /// <summary>
-        /// Form load event
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <summary>
-        /// Form load event
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <summary>
-        /// <summary>
-        /// <summary>
-        /// <summary>
-        /// <summary>
-        /// <summary>
         /// Form load event
         /// </summary>
         /// <param name="sender"></param>
@@ -53,6 +41,7 @@ namespace SCS_Test
             isFormLoadCompleted = true;
         }
 
+        // TODO: this is temp method should be removed in actual code
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             frmProjectedInventory newForm = new frmProjectedInventory();
@@ -69,6 +58,37 @@ namespace SCS_Test
             //this.Close();
             Application.Exit();
         }
+
+        #region "Move between grids events and methods"
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceGridView"></param>
+        /// <param name="destinationGridView"></param>
+        /// <param name="isMove"></param>
+        private void MoveRowsBetweenGridViews(DataGridView sourceGridView, DataGridView destinationGridView, bool isMove = false)
+        {
+
+            if (sourceGridView.SelectedRows.Count <= 0) // this is an extra check
+                return;// do not do any thing
+
+            
+            // Now see what is source grid. this is required as we are using databind() method
+            if (sourceGridView.Name.ToUpper().Equals("ALLACTIVEAGENCYDATAGRIDVIEW"))
+            {
+
+            }
+            foreach (DataGridViewRow row in sourceGridView.SelectedRows)
+            {
+                string agencyCode = row.Cells[0].Value.ToString();
+                string agencyName = row.Cells[1].Value.ToString();
+                //tempUnassignedAgencies.Add()
+                destinationGridView.Rows.Add(agencyCode, agencyName);
+                if (isMove)
+                    sourceGridView.Rows.RemoveAt(row.Index);
+            }//end for
+        } //MoveRowsBetweenGridViews
+
         /// <summary>
         /// Will move all the rows from All to selected section.
         /// </summary>
@@ -86,6 +106,7 @@ namespace SCS_Test
             GetGridRowCount();
             SaveButton.Enabled = true;
         }
+
         /// <summary>
         /// Move selected items from Selected to All Active grid
         /// </summary>
@@ -104,6 +125,7 @@ namespace SCS_Test
             GetGridRowCount();
             SaveButton.Enabled = true;
         }
+
         /// <summary>
         /// Move selected item from All Active to SelectedAgencyDataGridView
         /// </summary>
@@ -119,6 +141,53 @@ namespace SCS_Test
             MoveRowsBetweenGridViews(AllActiveAgencyDataGridView, SelectedAgencyDataGridView,true);
             SaveButton.Enabled = true;
         }
+
+        /// <summary>
+        /// Move selected item from SelectedAgencyDataGridView to All active grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MoveOneToAllbutton_Click(object sender, EventArgs e)
+        {
+            for (int rowIndex = 0; rowIndex <= SelectedAgencyDataGridView.SelectedRows.Count - 1; rowIndex++)
+                foreach (DataGridViewRow row in SelectedAgencyDataGridView.SelectedRows)
+                {
+                    string agencyCode = row.Cells[0].Value.ToString();
+                    string agencyName = row.Cells[1].Value.ToString();
+                    // add to destination grid
+                    AllActiveAgencyDataGridView.Rows.Add(agencyCode, agencyName);
+                    // Delete from source grid
+                    SelectedAgencyDataGridView.Rows.RemoveAt(row.Index);
+                }
+            SaveButton.Enabled = true;
+        }// end MoveOneToAllbutton_Click
+
+
+        private void SearchAllTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (SearchAllTextBox.Text.Trim().Length > 0)
+            {
+                SearchAllClearButton.Enabled = true;
+                IEnumerable<AgencyTeam> filteredData = unassignedAgencies.Where(p => p.Agency_Name.ToUpper().Contains(SearchAllTextBox.Text.Trim().ToUpper()));
+                AllActiveAgencyDataGridView.DataSource = filteredData;
+            } //end if
+            else
+                SearchAllClearButton.Enabled = false;
+        }
+
+        private void SearchAllClearButton_Click(object sender, EventArgs e)
+        {
+            SearchAllTextBox.Text = "";
+            SearchAllClearButton.Enabled = false;
+        }
+
+        private void SearchSelectedClearButton_Click(object sender, EventArgs e)
+        {
+            SearchAgencyTextbox.Text = "";
+            SearchSelectedClearButton.Enabled = false;
+        }
+        #endregion
+
         /// <summary>
         /// This event filed when the row selection of All Active grid changed to make sure that we are disabling all the buttons properly
         /// </summary>
@@ -141,25 +210,7 @@ namespace SCS_Test
             MoveSelectedToAllButton.Enabled = (SelectedAgencyDataGridView.Rows.Count <= 0) ? false : true;
             GetGridRowCount();
         }
-        /// <summary>
-        /// Move selected item from SelectedAgencyDataGridView to All active grid
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MoveOneToAllbutton_Click(object sender, EventArgs e)
-        {           
-            for (int rowIndex = 0; rowIndex <= SelectedAgencyDataGridView.SelectedRows.Count - 1; rowIndex++)         
-                foreach (DataGridViewRow row in SelectedAgencyDataGridView.SelectedRows)
-                {
-                    string agencyCode = row.Cells[0].Value.ToString();
-                    string agencyName = row.Cells[1].Value.ToString();
-                    // add to destination grid
-                    AllActiveAgencyDataGridView.Rows.Add(agencyCode, agencyName);
-                    // Delete from source grid
-                    SelectedAgencyDataGridView.Rows.RemoveAt(row.Index);
-                }
-            SaveButton.Enabled = true;
-        }// end MoveOneToAllbutton_Click
+      
         /// <summary>
         /// 
         /// </summary>
@@ -170,6 +221,7 @@ namespace SCS_Test
             MessageBox.Show("Data saved successfully!!!", "SCS", MessageBoxButtons.OK, MessageBoxIcon.Information);
             SaveButton.Enabled = false;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -199,7 +251,11 @@ namespace SCS_Test
         {
             SelectedCountLabel.Text = "Count: " + SelectedAgencyDataGridView.Rows.Count.ToString();
             AllCountLabel.Text = "Count: " + AllActiveAgencyDataGridView.Rows.Count.ToString();
+            // This will also hide active indicator column in unassigned grid
+            AllActiveAgencyDataGridView.Columns[2].Width = AllActiveAgencyDataGridView != null && AllActiveAgencyDataGridView.Columns.Count > 0 ? 0 : 0;
         }
+
+        #region "Data load methods"
         /// <summary>
         /// This will function will fetch all the active agencies information from the database 
         /// and keeps this record in the memory
@@ -209,8 +265,9 @@ namespace SCS_Test
             // Get this data from database only once
             //GetAgencyData();
             GetAllTeamsInformation();
-            GetGridRowCount();            
+            GetGridRowCount();
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -228,48 +285,31 @@ namespace SCS_Test
             }
             TeamComboBox.SelectedIndex = -1; //Just to make the combobox not to select anything
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        private void GetAgencyData()
-        {
-            AllActiveAgencyDataGridView.Rows.Add("ADCR", "PHD USA (NY)");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG", "AMER MEDIA ADVOCACY");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG1", "AMER MEDIA ADVOCACY1");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG2", "AMER MEDIA ADVOCACY2");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG3", "AMER MEDIA ADVOCACY3");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG4", "AMER MEDIA ADVOCACY4");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG5", "AMER MEDIA ADVOCACY5");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG6", "AMER MEDIA ADVOCACY6");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG7", "AMER MEDIA ADVOCACY7");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG8", "AMER MEDIA ADVOCACY8");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG9", "AMER MEDIA ADVOCACY9");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG10", "AMER MEDIA ADVOCACY10");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG11", "AMER MEDIA ADVOCACY11");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG12", "AMER MEDIA ADVOCACY12");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG13", "AMER MEDIA ADVOCACY13");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG14", "AMER MEDIA ADVOCACY14");
-            AllActiveAgencyDataGridView.Rows.Add("AMAG15", "AMER MEDIA ADVOCACY15");
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sourceGridView"></param>
-        /// <param name="destinationGridView"></param>
-        /// <param name="isMove"></param>
-        private void MoveRowsBetweenGridViews(DataGridView sourceGridView, DataGridView destinationGridView, bool isMove = false)
-        {
-            if (sourceGridView.SelectedRows.Count <= 0)
-                return;// do not do any thing
-            foreach (DataGridViewRow row in sourceGridView.SelectedRows)               
-            {
-                string agencyCode = row.Cells[0].Value.ToString();
-                string agencyName = row.Cells[1].Value.ToString();
-                destinationGridView.Rows.Add(agencyCode, agencyName);
-                if (isMove)
-                    sourceGridView.Rows.RemoveAt(row.Index);
-            }//end for
-        }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //private void GetAgencyData()
+        //{
+        //    AllActiveAgencyDataGridView.Rows.Add("ADCR", "PHD USA (NY)");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG", "AMER MEDIA ADVOCACY");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG1", "AMER MEDIA ADVOCACY1");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG2", "AMER MEDIA ADVOCACY2");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG3", "AMER MEDIA ADVOCACY3");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG4", "AMER MEDIA ADVOCACY4");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG5", "AMER MEDIA ADVOCACY5");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG6", "AMER MEDIA ADVOCACY6");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG7", "AMER MEDIA ADVOCACY7");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG8", "AMER MEDIA ADVOCACY8");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG9", "AMER MEDIA ADVOCACY9");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG10", "AMER MEDIA ADVOCACY10");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG11", "AMER MEDIA ADVOCACY11");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG12", "AMER MEDIA ADVOCACY12");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG13", "AMER MEDIA ADVOCACY13");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG14", "AMER MEDIA ADVOCACY14");
+        //    AllActiveAgencyDataGridView.Rows.Add("AMAG15", "AMER MEDIA ADVOCACY15");
+        //} //GetAgencyData
+
         /// <summary>
         /// 
         /// </summary>
@@ -282,7 +322,7 @@ namespace SCS_Test
                 HttpResponseMessage response = webAPIClient.GetAsync("Team/GetAgneciesByTeam?teamID=" +  teamID.ToString()).Result;
                 if(response.IsSuccessStatusCode)
                 {
-                    List<AgencyTeam> teamAgency = response.Content.ReadAsAsync<List<AgencyTeam>>().Result;
+                    teamAgency = response.Content.ReadAsAsync<List<AgencyTeam>>().Result;
                     //SelectedAgencyDataGridView.Rows.Clear();
                     // Check if we have any agencies for this team then only process the data.
                     if (teamAgency != null && teamAgency.Count > 0)
@@ -303,7 +343,8 @@ namespace SCS_Test
 #endif
             }
         } // LoadDataForSelectedTeam
-        List<AgencyTeam> unassignedAgencies;
+        
+
         /// <summary>
         /// 
         /// </summary>
@@ -312,12 +353,10 @@ namespace SCS_Test
             //AllActiveAgencyDataGridView.Rows.Clear();
             HttpResponseMessage response = webAPIClient.GetAsync("Agency/GetAllUnassingedActiveAgencies").Result;
             if(response.IsSuccessStatusCode)
-            {
-                
+            {                
                 unassignedAgencies = response.Content.ReadAsAsync<List<AgencyTeam>>().Result;
                 if (unassignedAgencies != null && unassignedAgencies.Count > 0) // if we have any active unassigned agencies in the system
                     AllActiveAgencyDataGridView.DataSource = unassignedAgencies;
-
 
                 //if (unassignedAgencies != null && unassignedAgencies.Count > 0) // if we have any active unassigned agencies in the system                
                 //    foreach (AgencyTeam agency in unassignedAgencies)
@@ -326,32 +365,7 @@ namespace SCS_Test
                     StatusLabel.Text = "No unassigned active agencies found!!!";
             } // if response         
         } // end of LoadUnassingedAgencies()
-
         #endregion
-
-
-        private void SearchAllTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (SearchAllTextBox.Text.Trim().Length > 0)
-            {
-                SearchAllClearButton.Enabled = true;
-                IEnumerable<AgencyTeam> filteredData =  unassignedAgencies.Where(p => p.Agency_Name.ToUpper().Contains(SearchAllTextBox.Text.Trim().ToUpper()));
-                AllActiveAgencyDataGridView.DataSource = filteredData;
-            } //end if
-            else
-                SearchAllClearButton.Enabled = false;
-        }
-
-        private void SearchAllClearButton_Click(object sender, EventArgs e)
-        {
-            SearchAllTextBox.Text = "";
-            SearchAllClearButton.Enabled = false;
-        }
-
-        private void SearchSelectedClearButton_Click(object sender, EventArgs e)
-        {
-            SearchAgencyTextbox.Text = "";
-            SearchSelectedClearButton.Enabled = false;
-        }
+        #endregion        
     }
 }
